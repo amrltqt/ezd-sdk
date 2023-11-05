@@ -1,1 +1,1 @@
-# ezd-sdk
+# EZD SDK
