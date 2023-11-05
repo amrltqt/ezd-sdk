@@ -1,0 +1,24 @@
+[project]
+name = "ezd"
+version = "0.1.0"
+description = "Wrapper over EZD API, the dashboard as images rendering SaaS available at https://ezd.amrltqt.com"
+authors = [
+    {name = "amrltqt", email = "contact@amrltqt.com"},
+]
+dependencies = [
+    "requests>=2.31.0",
+    "click>=8.1.7",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.4.3",
+]
+dev = []
