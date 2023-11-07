@@ -4,7 +4,7 @@ import requests
 
 from ezd.api.exception import APIException
 
-DEFAULT_API_URL = 'https://api.ezd.amrltqt.com'
+DEFAULT_API_URL = "https://api.ezd.amrltqt.com"
 
 
 class EZDClient:
@@ -31,8 +31,8 @@ class EZDClient:
         Returns:
             EZDClient: An instance of the client.
         """
-        base_url = os.environ.get('EZD_API_URL', DEFAULT_API_URL)
-        api_key = os.environ.get('EZD_API_KEY')
+        base_url = os.environ.get("EZD_API_URL", DEFAULT_API_URL)
+        api_key = os.environ.get("EZD_API_KEY")
         return cls(base_url, api_key)
 
     def _get_headers(self):
@@ -43,10 +43,10 @@ class EZDClient:
             dict: A dictionary of headers.
         """
         headers = {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         }
         if self.api_key:
-            headers['Authorization'] = f'Bearer {self.api_key}'
+            headers["Authorization"] = f"Bearer {self.api_key}"
         return headers
 
     def _make_request(self, method, path, data=None, params=None):
@@ -66,7 +66,9 @@ class EZDClient:
         headers = self._get_headers()
 
         try:
-            response = requests.request(method, url, json=data, params=params, headers=headers)
+            response = requests.request(
+                method, url, json=data, params=params, headers=headers
+            )
             response.raise_for_status()
             return response
         except requests.exceptions.RequestException as e:
@@ -81,9 +83,8 @@ class EZDClient:
         Returns:
             list: A list of resource objects.
         """
-        response = self._make_request('GET', 'dashboards', params={"limit": 1000})
+        response = self._make_request("GET", "dashboards", params={"limit": 1000})
         return response.json()["results"]
-
 
     def get_dashboard(self, dashboard_id):
         """
@@ -95,9 +96,8 @@ class EZDClient:
         Returns:
             dict: A resource object.
         """
-        response = self._make_request('GET', f'dashboards/{dashboard_id}')
+        response = self._make_request("GET", f"dashboards/{dashboard_id}")
         return response.json()
-    
 
     def distribute_dashboard(self, dashboard_id, variables=None, targets=None):
         """
@@ -112,13 +112,14 @@ class EZDClient:
             dict: A resource object.
         """
 
-        
         data = {}
         if variables:
             data["variables"] = variables
-        
+
         if targets:
             data["targets"] = targets
-            
-        response = self._make_request('POST', f'dashboards/{dashboard_id}/distribute', data=data)
+
+        response = self._make_request(
+            "POST", f"dashboards/{dashboard_id}/distribute", data=data
+        )
         return response.json()

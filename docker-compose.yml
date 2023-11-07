@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .devcontainer/python-dev-image/Dockerfile
+    volumes:
+      - ./python-sdk:/var/app
