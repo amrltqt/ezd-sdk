@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  app:
+    image: python:alpine
+    working_dir: /var/app
+    entrypoint: ["sleep", "inf"]
+    volumes:
+      - ./python-sdk:/var/app
+    environment:
+      - PYTHONPATH=/var/app
