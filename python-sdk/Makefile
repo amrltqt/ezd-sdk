@@ -1,16 +1,10 @@
-.PHONY: run test requierments.txt pipclean
+.PHONY: run test install
 
 run:
-	PYTHONPATH=. python ezd/cli/main.py
+	python ezd/cli/main.py
 
 test:
-	PYTHONPATH=. pytest
+	pytest
 
-requierments.txt:
-	pip freeze > requierments.txt
-
-pipclean:
-	pip freeze | xargs pip uninstall -y
-
-pipinstall:
-	pip install -r requierments.txt
+install:
+	pdm sync
